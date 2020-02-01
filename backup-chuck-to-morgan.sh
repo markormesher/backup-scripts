@@ -1,17 +1,22 @@
 #! /usr/bin/env bash
 set -euo pipefail
 
-source .secrets
-
 function msg() {
   echo
   echo "[$(date -Iseconds)] $1"
 }
 
+if pgrep borg > /dev/null; then
+  msg "borg is already running - aborting"
+  exit 0
+fi
+
 if [[ ! -d /backups ]]; then
   msg "ERROR: /backups does not exist"
   exit 1
 fi
+
+source .secrets
 
 backup_path="/backups/$(date +%Y-%m-%d-%H-%M-%S)"
 mkdir ${backup_path}
