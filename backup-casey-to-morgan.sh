@@ -10,7 +10,7 @@ function msg() {
 
 # sync to borg
 msg "Syncing backups to borg master"
-borg create -s --compression none \
+borg create -s --compression none "$@" \
   markormesher@morgan:/borg/repo0::'{hostname}-{now}' \
   /home/markormesher/Pictures \
   /opt/digikam

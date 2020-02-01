@@ -33,7 +33,7 @@ find /backups -type d -empty -exec rm -rv {} +
 
 # sync to borg
 msg "Syncing backups to borg master"
-borg create -s --compression none \
+borg create -s --compression none "$@" \
   markormesher@morgan:/borg/repo0::'{hostname}-{now}' \
   /backups
 
