@@ -12,5 +12,6 @@
     0 2 * * *  bash -l -c "cd ~/backup-scripts; ./backup-chuck-to-morgan.sh >> .log 2>&1"
 
     # morgan - run overnight
+    0 3 * * * bash -l -c "cd ~/backup-scripts; ./prune-morgan-backups.sh >> .log 2>&1"
     0 4 * * * bash -l -c "cd ~/backup-scripts; ./sync-morgan-to-b2.sh >> .log 2>&1"
 
