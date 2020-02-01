@@ -29,6 +29,7 @@ done
 # retention old backups
 msg "Deleting backup files older than 21 days"
 find /backups -type f -mtime +21 -exec rm -v {} +
+find /backups -type d -empty -exec rm -rv {} +
 
 # sync to borg
 msg "Syncing backups to borg master"
