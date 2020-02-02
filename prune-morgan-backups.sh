@@ -18,3 +18,5 @@ borg prune --prefix chuck --stats --keep-daily 14 --keep-weekly 4 --keep-monthly
 
 msg "Pruning backups for casey"
 borg prune --prefix casey --stats --keep-daily 14 --keep-weekly 4 --keep-monthly 6 /borg/repo0
+
+msg "Finished pruning backups"
