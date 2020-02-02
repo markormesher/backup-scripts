@@ -16,8 +16,6 @@ if [[ ! -d /backups ]]; then
   exit 1
 fi
 
-source .secrets
-
 backup_path="/backups/$(date +%Y-%m-%d-%H-%M-%S)"
 mkdir ${backup_path}
 cd ${backup_path}

@@ -17,4 +17,6 @@ msg "Syncing to B2"
 rclone --transfers=1 --drive-chunk-size=250M "$@" sync /borg/repo0 b2-borg-repo0-crypt:
 rclone cleanup b2-borg-repo0-crypt:
 
+mkdir -p data
+date -Iseconds > data/last-sync-morgan-to-b2.txt
 msg "Finished syncing to B2"

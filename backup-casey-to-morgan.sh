@@ -11,8 +11,6 @@ if pgrep borg > /dev/null; then
   exit 0
 fi
 
-source .secrets
-
 # sync to borg
 msg "Syncing backups to borg master"
 borg create -s --compression none "$@" \
