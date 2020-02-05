@@ -10,7 +10,7 @@ const https = require('https');
     },
     {
       label: "Casey Backup",
-      thresholdHours: 49,
+      thresholdHours: 7 * 24,
       lastRun: new Date((await execCommand("borg list --prefix casey --format '{end}{NEWLINE}' --sort-by timestamp /borg/repo0 | tail -n 1")).trim()),
     },
     {
