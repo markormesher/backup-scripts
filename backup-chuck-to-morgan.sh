@@ -38,6 +38,7 @@ find /backups -type d -empty -exec rm -rv {} +
 msg "Syncing backups to borg master"
 borg create -s --compression none "$@" \
   markormesher@morgan:/borg/repo0::'{hostname}-{now}' \
-  /backups
+  /backups \
+  ~/vimwiki
 
 msg "Backup finished"
