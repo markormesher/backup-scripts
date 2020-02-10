@@ -11,10 +11,10 @@ if pgrep rclone > /dev/null; then
   exit 0
 fi
 
-export TMPDIR=/borg/tmp
+export TMPDIR=/hdd/borg/tmp
 
 msg "Syncing to B2"
-rclone --transfers=1 --drive-chunk-size=250M "$@" sync /borg/repo0 b2-borg-repo0-crypt:
+rclone --transfers=1 --drive-chunk-size=250M "$@" sync /hdd/borg/repo0 b2-borg-repo0-crypt:
 rclone cleanup b2-borg-repo0-crypt:
 
 mkdir -p data

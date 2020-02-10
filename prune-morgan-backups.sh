@@ -12,10 +12,10 @@ if pgrep borg > /dev/null; then
 fi
 
 msg "Pruning backups for chuck"
-borg prune --prefix chuck --stats --keep-daily 14 --keep-weekly 4 --keep-monthly 6 /borg/repo0
+borg prune --prefix chuck --stats --keep-daily 14 --keep-weekly 4 --keep-monthly 6 /hdd/borg/repo0
 
 msg "Pruning backups for casey"
-borg prune --prefix casey --stats --keep-daily 14 --keep-weekly 4 --keep-monthly 6 /borg/repo0
+borg prune --prefix casey --stats --keep-daily 14 --keep-weekly 4 --keep-monthly 6 /hdd/borg/repo0
 
 mkdir -p data
 date -Iseconds > data/last-prune-morgan-backups.txt

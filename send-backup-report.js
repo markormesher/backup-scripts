@@ -6,12 +6,12 @@ const https = require('https');
     {
       label: "Chuck Backup",
       thresholdHours: 25,
-      lastRun: new Date((await execCommand("borg list --prefix chuck --format '{end}{NEWLINE}' --sort-by timestamp /borg/repo0 | tail -n 1")).trim()),
+      lastRun: new Date((await execCommand("borg list --prefix chuck --format '{end}{NEWLINE}' --sort-by timestamp /hdd/borg/repo0 | tail -n 1")).trim()),
     },
     {
       label: "Casey Backup",
       thresholdHours: 7 * 24,
-      lastRun: new Date((await execCommand("borg list --prefix casey --format '{end}{NEWLINE}' --sort-by timestamp /borg/repo0 | tail -n 1")).trim()),
+      lastRun: new Date((await execCommand("borg list --prefix casey --format '{end}{NEWLINE}' --sort-by timestamp /hdd/borg/repo0 | tail -n 1")).trim()),
     },
     {
       label: "Backup Prune",
@@ -27,8 +27,8 @@ const https = require('https');
 
   const storageItems = [
     {
-      label: "/borg/repo0",
-      size: (await execCommand("du -h --max-depth 0 /borg/repo0 | awk '{ print $1 }'")).trim(),
+      label: "/hdd/borg/repo0",
+      size: (await execCommand("du -h --max-depth 0 /hdd/borg/repo0 | awk '{ print $1 }'")).trim(),
     },
   ];
 
