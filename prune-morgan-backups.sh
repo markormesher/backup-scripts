@@ -17,6 +17,9 @@ borg prune --prefix chuck --stats --keep-daily 14 --keep-weekly 4 --keep-monthly
 msg "Pruning backups for casey"
 borg prune --prefix casey --stats --keep-daily 14 --keep-weekly 4 --keep-monthly 6 /hdd/borg/repo0
 
+msg "Pruning backups for archive"
+borg prune --prefix archive --stats --keep-daily 14 --keep-weekly 4 --keep-monthly 6 /hdd/borg/repo0
+
 mkdir -p data
 date -Iseconds > data/last-prune-morgan-backups.txt
 msg "Finished pruning backups"

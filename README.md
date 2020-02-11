@@ -12,6 +12,7 @@
     0 2 * * *  bash -l -c "cd ~/backup-scripts; source .secrets; ./backup-chuck-to-morgan.sh >> .log 2>&1"
 
     # morgan
+    0 0 * * * bash -l -c "cd ~/backup-scripts; source .secrets; ./backup-archive-to-morgan.sh >> .log 2>&1"
     0 3 * * * bash -l -c "cd ~/backup-scripts; source .secrets; ./prune-morgan-backups.sh >> .log 2>&1"
     0 4 * * * bash -l -c "cd ~/backup-scripts; source .secrets; ./sync-morgan-to-b2.sh >> .log 2>&1"
     0 9 * * * bash -l -c "cd ~/backup-scripts; source .secrets; initnode; node ./send-backup-report.js >> .log 2>&1"
