@@ -9,6 +9,11 @@ const https = require('https');
       lastRun: new Date((await execCommand("borg list --prefix chuck --format '{end}{NEWLINE}' --sort-by timestamp /hdd/borg/repo0 | tail -n 1")).trim()),
     },
     {
+      label: "Kirito Backup",
+      thresholdHours: 25,
+      lastRun: new Date((await execCommand("borg list --prefix kirito --format '{end}{NEWLINE}' --sort-by timestamp /hdd/borg/repo0 | tail -n 1")).trim()),
+    },
+    {
       label: "Casey Backup",
       thresholdHours: 7 * 24,
       lastRun: new Date((await execCommand("borg list --prefix casey --format '{end}{NEWLINE}' --sort-by timestamp /hdd/borg/repo0 | tail -n 1")).trim()),

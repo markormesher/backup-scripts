@@ -16,6 +16,9 @@ prune_config="--stats --keep-daily 14 --keep-weekly 4 --keep-monthly 6 --keep-ye
 msg "Pruning backups for chuck"
 borg prune --prefix chuck ${prune_config} /hdd/borg/repo0
 
+msg "Pruning backups for kirito"
+borg prune --prefix kirito ${prune_config} /hdd/borg/repo0
+
 msg "Pruning backups for casey"
 borg prune --prefix casey ${prune_config} /hdd/borg/repo0
 
