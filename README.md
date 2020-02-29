@@ -11,6 +11,9 @@
     # chuck
     20 */2 * * *  bash -l -c "cd ~/backup-scripts; source .secrets; ./backup-chuck-to-morgan.sh >> .log 2>&1"
 
+    # kirito
+    20 1/2 * * *  bash -l -c "cd ~/backup-scripts; source .secrets; ./backup-chuck-to-morgan.sh >> .log 2>&1"
+
     # morgan
     30 */2 * * * bash -l -c "cd ~/backup-scripts; source .secrets; ./backup-archive-to-morgan.sh >> .log 2>&1"
     40 3 * * * bash -l -c "cd ~/backup-scripts; source .secrets; ./prune-morgan-backups.sh >> .log 2>&1"
