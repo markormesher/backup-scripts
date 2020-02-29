@@ -12,7 +12,7 @@
     20 */2 * * *  bash -l -c "cd ~/backup-scripts; source .secrets; ./backup-kirito-to-morgan.sh >> .log 2>&1"
 
     # kirito
-    20 1/2 * * *  bash -l -c "cd ~/backup-scripts; source .secrets; ./backup-chuck-to-morgan.sh >> .log 2>&1"
+    20 1 * * *  bash -l -c "cd ~/backup-scripts; source .secrets; ./backup-chuck-to-morgan.sh >> .log 2>&1"
 
     # morgan
     30 */2 * * * bash -l -c "cd ~/backup-scripts; source .secrets; ./backup-archive-to-morgan.sh >> .log 2>&1"
