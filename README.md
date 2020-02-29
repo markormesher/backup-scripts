@@ -9,7 +9,7 @@
     10 */2 * * * bash -l -c "cd ~/backup-scripts; source .secrets; ./backup-casey-to-morgan.sh >> .log 2>&1"
 
     # chuck
-    20 */2 * * *  bash -l -c "cd ~/backup-scripts; source .secrets; ./backup-chuck-to-morgan.sh >> .log 2>&1"
+    20 */2 * * *  bash -l -c "cd ~/backup-scripts; source .secrets; ./backup-kirito-to-morgan.sh >> .log 2>&1"
 
     # kirito
     20 1/2 * * *  bash -l -c "cd ~/backup-scripts; source .secrets; ./backup-chuck-to-morgan.sh >> .log 2>&1"
