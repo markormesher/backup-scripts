@@ -54,7 +54,7 @@ find /backups -type d -empty -exec rm -rv {} +
 # sync to borg
 msg "Syncing backups to borg master"
 archive_name="chuck-$(date -Iseconds | cut -d '+' -f 1)"
-borg create -s --compression none "$@" \
+borg create -s --compression zlib "$@" \
   markormesher@morgan:/hdd/borg/repo0::"${archive_name}" \
   /backups \
   ~/vimwiki

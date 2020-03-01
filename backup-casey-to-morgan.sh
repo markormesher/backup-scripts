@@ -14,7 +14,7 @@ fi
 # sync to borg
 msg "Syncing backups to borg master"
 archive_name="casey-$(date -Iseconds | cut -d '+' -f 1)"
-borg create -s --compression none "$@" \
+borg create -s --compression zlib "$@" \
   markormesher@morgan:/hdd/borg/repo0::"${archive_name}" \
   /home/markormesher/Pictures \
   /opt/digikam

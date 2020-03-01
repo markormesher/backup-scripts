@@ -14,7 +14,7 @@ fi
 # sync to borg
 msg "Syncing archive to borg master"
 archive_name="archive-$(date -Iseconds | cut -d '+' -f 1)"
-borg create -s --compression none "$@" \
+borg create -s --compression zlib "$@" \
   /hdd/borg/repo0::"${archive_name}" \
   /hdd/archive
 
