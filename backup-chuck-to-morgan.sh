@@ -38,6 +38,14 @@ if docker ps --format '{{.Names}}' | grep ${wp_mysql_container} &> /dev/null; th
   docker exec ${wp_mysql_container} mysqldump --all-databases --add-drop-database --user markspt -p"${password}" 2> /dev/null > ${output_file}
 fi
 
+# content backup for WP blog
+wp_content_container="marksprojecttrustcouk_app_1"
+if docker ps --format '{{.Names}}' | grep ${wp_content_container} &> /dev/null; then
+  msg "Creating content tar for ${wp_content_container}"
+  output_file="${backup_path}/${wp_content_container}.tar"
+  docker exec ${wp_content_container} tar -cf - /var/www/html > ${output_file}
+fi
+
 # retention old backups
 msg "Deleting backup files older than 21 days"
 find /backups -type f -mtime +21 -exec rm -v {} +
