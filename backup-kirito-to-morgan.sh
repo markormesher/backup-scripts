@@ -25,8 +25,8 @@ msg "Backup starting in ${backup_path}"
 # postgres dumps from docker
 docker ps --format '{{.Names}}' | grep postgres | grep -v slave | while read container; do
   msg "Creating postgres dump for ${container}"
-  output_file="${backup_path}/${container}.sql.gz"
-  docker exec ${container} pg_dumpall -U postgres --clean | gzip > ${output_file}
+  output_file="${backup_path}/${container}.sql"
+  docker exec ${container} pg_dumpall -U postgres --clean > ${output_file}
 done
 
 # retention old backups

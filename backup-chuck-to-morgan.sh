@@ -25,9 +25,18 @@ msg "Backup starting in ${backup_path}"
 # postgres dumps from docker
 docker ps --format '{{.Names}}' | grep postgres | grep -v slave | while read container; do
   msg "Creating postgres dump for ${container}"
-  output_file="${backup_path}/${container}.sql.gz"
-  docker exec ${container} pg_dumpall -U postgres --clean | gzip > ${output_file}
+  output_file="${backup_path}/${container}.sql"
+  docker exec ${container} pg_dumpall -U postgres --clean > ${output_file}
 done
+
+# mysql backup for WP blog
+wp_mysql_container="marksprojecttrustcouk_mysql_1"
+if docker ps --format '{{.Names}}' | grep ${wp_mysql_container} &> /dev/null; then
+  msg "Creating mysql dump for ${wp_mysql_container}"
+  output_file="${backup_path}/${wp_mysql_container}.sql"
+  password=$(cat /var/web/marksprojecttrust.co.uk/secrets/mysql.password)
+  docker exec ${wp_mysql_container} mysqldump --all-databases --add-drop-database --user markspt -p"${password}" 2> /dev/null > ${output_file}
+fi
 
 # retention old backups
 msg "Deleting backup files older than 21 days"
