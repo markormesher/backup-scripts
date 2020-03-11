@@ -29,21 +29,22 @@ docker ps --format '{{.Names}}' | grep postgres | grep -v slave | while read con
   docker exec ${container} pg_dumpall -U postgres --clean > ${output_file}
 done
 
-# mysql backup for WP blog
-wp_mysql_container="marksprojecttrustcouk_mysql_1"
-if docker ps --format '{{.Names}}' | grep ${wp_mysql_container} &> /dev/null; then
-  msg "Creating mysql dump for ${wp_mysql_container}"
-  output_file="${backup_path}/${wp_mysql_container}.sql"
-  password=$(cat /var/web/marksprojecttrust.co.uk/secrets/mysql.password)
-  docker exec ${wp_mysql_container} mysqldump --all-databases --add-drop-database --user markspt -p"${password}" 2> /dev/null > ${output_file}
-fi
+# back up WP blog if it hasn't been backed up in the last week
+if ! find /backups -name 'marksprojecttrustcouk*' -mtime -7 | egrep '.' &> /dev/null; then
+  wp_mysql_container="marksprojecttrustcouk_mysql_1"
+  if docker ps --format '{{.Names}}' | grep ${wp_mysql_container} &> /dev/null; then
+    msg "Creating mysql dump for ${wp_mysql_container}"
+    output_file="${backup_path}/${wp_mysql_container}.sql"
+    password=$(cat /var/web/marksprojecttrust.co.uk/secrets/mysql.password)
+    docker exec ${wp_mysql_container} mysqldump --all-databases --add-drop-database --user markspt -p"${password}" 2> /dev/null > ${output_file}
+  fi
 
-# content backup for WP blog
-wp_content_container="marksprojecttrustcouk_app_1"
-if docker ps --format '{{.Names}}' | grep ${wp_content_container} &> /dev/null; then
-  msg "Creating content tar for ${wp_content_container}"
-  output_file="${backup_path}/${wp_content_container}.tar"
-  docker exec ${wp_content_container} tar -cf - /var/www/html > ${output_file}
+  wp_content_container="marksprojecttrustcouk_app_1"
+  if docker ps --format '{{.Names}}' | grep ${wp_content_container} &> /dev/null; then
+    msg "Creating content tar for ${wp_content_container}"
+    output_file="${backup_path}/${wp_content_container}.tar"
+    docker exec ${wp_content_container} tar -cf - /var/www/html > ${output_file}
+  fi
 fi
 
 # retention old backups
