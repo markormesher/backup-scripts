@@ -1,6 +1,8 @@
 #! /usr/bin/env bash
 set -euo pipefail
 
+BORG_REPO="/hdd/borg/repo0"
+
 function msg() {
   echo
   echo "[$(date -Iseconds)] $1"
@@ -14,16 +16,16 @@ fi
 prune_config="--stats --keep-daily 14 --keep-weekly 4 --keep-monthly 6 --keep-yearly -1 --save-space"
 
 msg "Pruning backups for chuck"
-borg prune --prefix chuck ${prune_config} /hdd/borg/repo0
+borg prune --prefix chuck ${prune_config} "${BORG_REPO}"
 
 msg "Pruning backups for kirito"
-borg prune --prefix kirito ${prune_config} /hdd/borg/repo0
+borg prune --prefix kirito ${prune_config} "${BORG_REPO}"
 
 msg "Pruning backups for casey"
-borg prune --prefix casey ${prune_config} /hdd/borg/repo0
+borg prune --prefix casey ${prune_config} "${BORG_REPO}"
 
 msg "Pruning backups for archive"
-borg prune --prefix archive ${prune_config} /hdd/borg/repo0
+borg prune --prefix archive ${prune_config} "${BORG_REPO}"
 
 mkdir -p data
 date -Iseconds > data/last-prune-morgan-backups.txt

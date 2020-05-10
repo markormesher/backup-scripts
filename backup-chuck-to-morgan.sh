@@ -1,6 +1,8 @@
 #! /usr/bin/env bash
 set -euo pipefail
 
+BORG_REPO="/hdd/borg/repo0"
+
 function msg() {
   echo
   echo "[$(date -Iseconds)] $1"
@@ -55,8 +57,8 @@ find /backups -type d -empty -exec rm -rv {} +
 # sync to borg
 msg "Syncing backups to borg master"
 archive_name="chuck-$(date -Iseconds | cut -d '+' -f 1)"
-borg create -s --compression zlib "$@" \
-  markormesher@morgan:/hdd/borg/repo0::"${archive_name}" \
+borg create -s --compression zlib \
+  markormesher@morgan:"${BORG_REPO}"::"${archive_name}" \
   /backups \
   ~/vimwiki
 
