@@ -11,7 +11,7 @@ if pgrep borg > /dev/null; then
   exit 0
 fi
 
-prune_config="--stats --keep-daily 14 --keep-weekly 4 --keep-monthly 6 --keep-yearly -1"
+prune_config="--stats --keep-daily 14 --keep-weekly 4 --keep-monthly 6 --keep-yearly -1 --save-space"
 
 msg "Pruning backups for chuck"
 borg prune --prefix chuck ${prune_config} /hdd/borg/repo0
