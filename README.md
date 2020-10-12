@@ -2,27 +2,27 @@
 
 > See also: [Building Your Own Linux Cloud Backup System](https://medium.com/@mormesher/building-your-own-linux-cloud-backup-system-75750f47d550).
 
-* Various machines backup to a Borg Backup repo on `morgan` (RPi + USB HDD).
-* `morgan` syncs the Borg repo to Backblaze B2.
+- Various machines backup to a Borg Backup repo on `bigmike` (tiny home server).
+- `bigmike` syncs the Borg repo to Backblaze B2.
 
 ## Schedules
 
-* More-than-daily jobs happen at 10-minute offsets on even-numbered hours.
-* Daily jobs happen at the start of odd-numbered hours.
+- More-than-daily jobs happen at 10-minute offsets on even-numbered hours.
+- Daily jobs happen at the start of odd-numbered hours.
 
 ```
 # casey
-10 */2 * * * bash -l -c "cd ~/backup-scripts; source .secrets; ./backup-casey-to-morgan.sh >> .log 2>&1"
+10 */2 * * * bash -l -c "~/backup-scripts/backup-casey-to-borg.sh >> .log 2>&1"
 
 # chuck
-20 */2 * * *  bash -l -c "cd ~/backup-scripts; source .secrets; ./backup-chuck-to-morgan.sh >> .log 2>&1"
+20 */2 * * *  bash -l -c "~/backup-scripts/backup-chuck-to-borg.sh >> .log 2>&1"
 
 # kirito
-00 1 * * *  bash -l -c "cd ~/backup-scripts; source .secrets; ./backup-kirito-to-morgan.sh >> .log 2>&1"
+00 1 * * *  bash -l -c "~/backup-scripts/backup-kirito-to-borg.sh >> .log 2>&1"
 
-# morgan
-30 */2 * * * bash -l -c "cd ~/backup-scripts; source .secrets; ./backup-archive-to-morgan.sh >> .log 2>&1"
-00 3 * * * bash -l -c "cd ~/backup-scripts; source .secrets; ./prune-morgan-backups.sh >> .log 2>&1"
-00 5 * * * bash -l -c "cd ~/backup-scripts; source .secrets; ./sync-morgan-to-b2.sh >> .log 2>&1"
-00 7 * * * bash -l -c "cd ~/backup-scripts; source .secrets; node ./send-backup-report.js >> .log 2>&1"
+# bigmike
+30 */2 * * * bash -l -c "~/backup-scripts/backup-archive-to-borg.sh >> .log 2>&1"
+00 3 * * * bash -l -c "~/backup-scripts/prune-borg-backups.sh >> .log 2>&1"
+00 5 * * * bash -l -c "~/backup-scripts/sync-borg-to-b2.sh >> .log 2>&1"
+00 7 * * * bash -l -c "~/backup-scripts/send-backup-report.sh >> .log 2>&1"
 ```

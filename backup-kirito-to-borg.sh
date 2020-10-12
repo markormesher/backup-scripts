@@ -1,17 +1,12 @@
 #! /usr/bin/env bash
 set -euo pipefail
 
-BORG_REPO="/hdd/borg/repo0"
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+source "${script_dir}/utils.sh"
 
-function msg() {
-  echo
-  echo "[$(date -Iseconds)] $1"
-}
-
-if pgrep borg > /dev/null; then
-  msg "borg is already running - aborting"
-  exit 0
-fi
+load_secrets
+load_settings
+check_proc_not_running borg
 
 if [[ ! -d /backups ]]; then
   msg "ERROR: /backups does not exist"
@@ -37,10 +32,10 @@ find /backups -type f -mtime +21 -exec rm -v {} +
 find /backups -type d -empty -exec rm -rv {} +
 
 # sync to borg
-msg "Syncing backups to borg master"
+msg "Syncing backups to borg"
 archive_name="kirito-$(date -Iseconds | cut -d '+' -f 1)"
 borg create -s --compression zlib \
-  markormesher@morgan:"${BORG_REPO}"::"${archive_name}" \
+  markormesher@"${BORG_HOST}":"${BORG_REPO}"::"${archive_name}" \
   /backups
 
 msg "Backup finished"
