@@ -50,11 +50,12 @@ find /backups -type f -mtime +21 -exec rm -v {} +
 find /backups -type d -empty -exec rm -rv {} +
 
 # sync to borg
-msg "Syncing backups to borg"
-archive_name="chuck-$(date -Iseconds | cut -d '+' -f 1)"
-borg create -s --compression zlib \
-  markormesher@"${BORG_HOST}":"${BORG_REPO}"::"${archive_name}" \
-  /backups \
-  ~/vimwiki
+# temporarily disabled while chuck cannot reach out to bigmike
+#msg "Syncing backups to borg"
+#archive_name="chuck-$(date -Iseconds | cut -d '+' -f 1)"
+#borg create -s --compression zlib \
+#  markormesher@"${BORG_HOST}":"${BORG_REPO}"::"${archive_name}" \
+#  /backups \
+#  ~/vimwiki
 
 msg "Backup finished"
