@@ -59,7 +59,7 @@ trap "rm -f \"${report_output}\"" EXIT
 check_archive "Archive" "archive" $(( 7 * 24 )) >> "${report_output}"
 check_archive "Casey" "casey" $(( 7 * 24 )) >> "${report_output}"
 check_archive "Chuck" "chuck" 25 >> "${report_output}"
-#check_archive "Kirito" "kirito" 25 >> "${report_output}"
+check_archive "Kirito" "kirito" 25 >> "${report_output}"
 check_from_file "Backup prune" "${script_dir}/data/last-prune.txt" 25 >> "${report_output}"
 check_from_file "Sync to B2" "${script_dir}/data/last-sync.txt" 25 >> "${report_output}"
 
