@@ -1,4 +1,4 @@
-export BORG_HOST="bigmike"
+export BORG_HOST="tatsu"
 export BORG_REPO="/mnt/hdd/borg/repo0"
 export B2_BUCKET="mormesher-borg-repo0"
 export RCLONE_REMOTE="b2-mormesher-borg-repo0"

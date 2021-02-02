@@ -2,8 +2,8 @@
 
 > See also: [Building Your Own Linux Cloud Backup System](https://medium.com/@mormesher/building-your-own-linux-cloud-backup-system-75750f47d550).
 
-- Various machines backup to a Borg Backup repo on `bigmike` (tiny home server).
-- `bigmike` syncs the Borg repo to Backblaze B2.
+- Various machines backup to a Borg Backup repo on `tatsu` (tiny home server).
+- `tatsu` syncs the Borg repo to Backblaze B2.
 
 ## Schedules
 
@@ -20,7 +20,7 @@
 # kirito
 00 1 * * *  bash -l -c "~/backup-scripts/backup-kirito-to-borg.sh >> .log 2>&1"
 
-# bigmike
+# tatsu
 30 */2 * * * bash -l -c "~/backup-scripts/backup-archive-to-borg.sh >> .log 2>&1"
 00 3 * * * bash -l -c "~/backup-scripts/prune-borg-backups.sh >> .log 2>&1"
 00 5 * * * bash -l -c "~/backup-scripts/sync-borg-to-b2.sh >> .log 2>&1"
