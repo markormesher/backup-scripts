@@ -27,7 +27,7 @@ function load_settings() {
 }
 
 function ensure_borg_host() {
-  if [[ "${BORG_HOST}" != "$(hostname)" ]]; then
+  if [[ "${BORG_HOST}" != "$(hostname)" ]] && [[ "${BORG_HOST_LOCAL_NAME}" != "$(hostname)" ]]; then
     msg "ERROR: this script should only be run on ${BORG_HOST}"
     exit 1
   fi
