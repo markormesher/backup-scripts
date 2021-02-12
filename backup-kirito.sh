@@ -32,7 +32,7 @@ find /backups -type f -mtime +21 -exec rm -v {} +
 find /backups -type d -empty -exec rm -rv {} +
 
 # sync to borg
-msg "Syncing backups to borg"
+msg "Backing up"
 archive_name="kirito-$(date -Iseconds | cut -d '+' -f 1)"
 borg create -s --compression zlib \
   markormesher@"${BORG_HOST}":"${BORG_REPO}"::"${archive_name}" \

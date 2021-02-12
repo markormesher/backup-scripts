@@ -20,7 +20,6 @@ function check_archive() {
 
   backup_age=$(( now_ts - backup_ts ))
 
-  backup_age_s=$(( backup_age % 60 ))
   backup_age_m=$(( (backup_age / 60) % 60 ))
   backup_age_h=$(( backup_age / 60 / 60 ))
 
@@ -42,7 +41,6 @@ function check_from_file() {
 
   run_age=$(( now_ts - run_ts ))
 
-  run_age_s=$(( run_age % 60 ))
   run_age_m=$(( (run_age / 60) % 60 ))
   run_age_h=$(( run_age / 60 / 60 ))
 
@@ -54,14 +52,16 @@ function check_from_file() {
 }
 
 report_output=$(mktemp)
-trap "rm -f \"${report_output}\"" EXIT
+trap rm -f "${report_output}" EXIT
 
-check_archive "Archive" "archive" $(( 7 * 24 )) >> "${report_output}"
-check_archive "Casey" "casey" $(( 7 * 24 )) >> "${report_output}"
-check_archive "Chuck" "chuck" 25 >> "${report_output}"
-check_archive "Kirito" "kirito" 25 >> "${report_output}"
-check_from_file "Backup prune" "${script_dir}/data/last-prune.txt" 25 >> "${report_output}"
-check_from_file "Sync to B2" "${script_dir}/data/last-sync.txt" 25 >> "${report_output}"
+{
+  check_archive "Tatsu" "tatsu" 25
+  check_archive "Casey" "casey" $(( 7 * 24 ))
+  check_archive "Chuck" "chuck" 25
+  check_archive "Kirito" "kirito" 25
+  check_from_file "Backup prune" "${script_dir}/data/last-prune.txt" 25
+  check_from_file "Sync to B2" "${script_dir}/data/last-sync.txt" 25
+} >> "${report_output}"
 
 if grep ERROR "${report_output}" > /dev/null; then
   report_title="Backup Errors"

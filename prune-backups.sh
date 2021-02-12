@@ -20,8 +20,8 @@ borg prune --prefix kirito ${prune_config} "${BORG_REPO}"
 msg "Pruning backups for casey"
 borg prune --prefix casey ${prune_config} "${BORG_REPO}"
 
-msg "Pruning backups for archive"
-borg prune --prefix archive ${prune_config} "${BORG_REPO}"
+msg "Pruning backups for tatsu"
+borg prune --prefix tatsu ${prune_config} "${BORG_REPO}"
 
 mkdir -p data
 date -Iseconds > "${script_dir}/data/last-prune.txt"

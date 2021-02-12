@@ -12,17 +12,17 @@
 
 ```
 # casey
-10 */2 * * * bash -l -c "~/backup-scripts/backup-casey-to-borg.sh >> .log 2>&1"
+10 */2 * * * bash -l -c "~/backup-scripts/backup-casey.sh >> .log 2>&1"
 
 # chuck
-20 */2 * * *  bash -l -c "~/backup-scripts/backup-chuck-to-borg.sh >> .log 2>&1"
+20 */2 * * *  bash -l -c "~/backup-scripts/backup-chuck.sh >> .log 2>&1"
 
 # kirito
-00 1 * * *  bash -l -c "~/backup-scripts/backup-kirito-to-borg.sh >> .log 2>&1"
+00 1 * * *  bash -l -c "~/backup-scripts/backup-kirito.sh >> .log 2>&1"
 
 # tatsu
-30 */2 * * * bash -l -c "~/backup-scripts/backup-archive-to-borg.sh >> .log 2>&1"
-00 3 * * * bash -l -c "~/backup-scripts/prune-borg-backups.sh >> .log 2>&1"
-00 5 * * * bash -l -c "~/backup-scripts/sync-borg-to-b2.sh >> .log 2>&1"
+30 */2 * * * bash -l -c "~/backup-scripts/backup-tatsu.sh >> .log 2>&1"
+00 3 * * * bash -l -c "~/backup-scripts/prune-backups.sh >> .log 2>&1"
+00 5 * * * bash -l -c "~/backup-scripts/sync-to-b2.sh >> .log 2>&1"
 00 7 * * * bash -l -c "~/backup-scripts/send-backup-report.sh >> .log 2>&1"
 ```

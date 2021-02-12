@@ -8,8 +8,7 @@ load_secrets
 load_settings
 check_proc_not_running borg
 
-# sync to borg
-msg "Syncing backups to borg"
+msg "Backing up"
 archive_name="casey-$(date -Iseconds | cut -d '+' -f 1)"
 borg create -s --compression zlib \
   markormesher@"${BORG_HOST}":"${BORG_REPO}"::"${archive_name}" \

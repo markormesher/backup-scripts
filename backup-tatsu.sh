@@ -9,11 +9,14 @@ load_settings
 ensure_borg_host
 check_proc_not_running borg
 
-# sync to borg
-msg "Syncing archive to borg"
-archive_name="archive-$(date -Iseconds | cut -d '+' -f 1)"
+msg "Backing up"
+archive_name="tatsu-$(date -Iseconds | cut -d '+' -f 1)"
 borg create -s --compression zlib \
+  --exclude '*/node_modules/*' \
+  --exclude '*/.piolibdeps/*' \
+  --progress \
   "${BORG_REPO}"::"${archive_name}" \
-  /mnt/hdd/cloud/Archive
+  /mnt/hdd/cloud/Archive \
+  ~/apps
 
 msg "Backup finished"
