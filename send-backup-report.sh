@@ -52,7 +52,7 @@ function check_from_file() {
 }
 
 report_output=$(mktemp)
-trap rm -f "${report_output}" EXIT
+trap 'rm -f "${report_output}"' EXIT
 
 {
   check_archive "Tatsu" "tatsu" 25
